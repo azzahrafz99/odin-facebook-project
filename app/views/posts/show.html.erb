@@ -1,0 +1,51 @@
+<%= render 'layouts/header' %>
+<br>
+<div class="row">
+  <div class="container">
+    <div class="row">
+      <%= link_to posts_path, class: 'waves-light btn' do %>
+        <i class="material-icons left">fast_rewind</i>Back
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <div class="card horizontal">
+          <div class="card-stacked">
+            <div class="card-content">
+              <h5 class="post-title"><%= @post.title%></h5>
+              <b><%= @post.user.username %></b>
+              <%= @post.created_at.to_date %>
+            </div>
+            <div class="card-action">
+              <p><%= @post.content %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <blockquote>
+      <%= @post_comments.count %> Comments
+    </blockquote>
+    <div class="row">
+      <%= form_for [@post, Comment.new] do |f| %>
+      <%= f.text_area :body, placeholder: "Add a comment", class: 'materialize-textarea' %><br/>
+      <%= f.submit "Add Comment", class: 'waves-light btn' %>
+      <% end %>
+    </div>
+    <div class="row">
+      <% @post_comments.each do |post_comment| %>
+        <div class="row">
+          <div class="col s12">
+            <div class="card horizontal">
+              <div class="card-stacked">
+                <div class="card-action">
+                  <p><%= post_comment.body %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

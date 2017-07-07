@@ -1,0 +1,28 @@
+<%= render 'layouts/header' %>
+<br>
+<div class="row">
+  <div class="container">
+    <%= render 'posts/new'%>
+    <% @posts.each do |post| %>
+      <div class="row">
+        <div class="col s12">
+          <div class="card horizontal">
+            <% if post.image.exists? %>
+              <div class="card-image image-size">
+                <p><%= image_tag post.image.url %></p>
+              </div>
+            <% end %>
+            <div class="card-content">
+              <h5 class="post-title"><%= link_to post.title, post_path(post) %></h5>
+              <b><%= post.user.username %></b>
+              <%= post.created_at.to_date %>
+              <div class="card-action">
+                <p><%= post.content %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

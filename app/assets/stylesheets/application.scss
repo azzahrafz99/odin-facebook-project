@@ -1,0 +1,35 @@
+@import "materialize";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+.blue-bg {
+  background-color: #3F51B5;
+}
+
+.odin-logo {
+  margin-left: 10px;
+  a {
+    font-size: 24px;
+  }
+  img {
+      height: 50px;
+      margin-top: 5px;
+  }
+}
+
+.post-title {
+  color: #3F51B5;
+}
+.profile {
+  background-color: #ededed;
+  margin-top: -20px;
+  padding: 30px;
+  img {
+    border-radius: 50%;
+  }
+}
+
+.image-size {
+  img {
+    width: 100px;
+  }
+}

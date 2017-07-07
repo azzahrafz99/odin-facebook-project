@@ -1,0 +1,6 @@
+<%= form_for (@user = User.find(params[:id])) do %>
+  <%= text_field :user, :username %>
+  <%= text_field :user, :email %>
+  <%= password_field :user, :password %>
+  <%= submit_tag "Submit" %>
+<% end %>

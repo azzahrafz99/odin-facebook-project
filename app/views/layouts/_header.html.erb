@@ -1,0 +1,22 @@
+<nav>
+  <div class="nav-wrapper grey darken-3">
+    <div class="odin-logo">
+      <a href="#" class="brand-logo">
+        <img src="https://www.theodinproject.com/assets/odin_head_silhouette_2_circle_simple_transparent-b2ee08a8bcec81a04d793cc3e151d6a0c261be84f9830705bfa78587f57026dc.gif" alt="odin-logo">Odin Facebook
+      </a>
+    </div>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <% if signed_in? %>
+      <li>
+        <%= link_to 'Home', posts_path %>
+      </li>
+      <li>
+        <%= link_to 'Profile', @current_user %>
+      </li>
+      <li>
+          <%= link_to 'Logout', logout_path %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

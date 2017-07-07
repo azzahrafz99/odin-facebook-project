@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col s12 m12">
+    <div class="card grey lighten-5">
+      <div class="card-content">
+        <blockquote class="teal-text"><h3>Create Post</h3></blockquote>
+        <%= form_for [@post, Post.new], html: {multipart: true} do |f| %>
+        <p>
+          <%= f.label :title %><br />
+          <%= f.text_field :title %><br />
+        </p>
+        <p>
+          <%= f.label :content %><br />
+          <%= f.text_area :content, class: "materialize-textarea" %><br />
+        </p>
+        <p>
+          <%= f.label :image, "Attach an Image" %><br />
+          <%= f.file_field :image %>
+        </p>
+        <br>
+        <p>
+          <%= button_tag( :class => "btn waves-effect waves-light btn") do %>
+          Post <i class="material-icons right">send</i>
+          <% end %>
+        </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
