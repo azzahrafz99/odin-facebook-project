@@ -1,0 +1,41 @@
+<%= form_for(@user, html: {multipart: true}) do |f| %>
+  <div class="row">
+    <div class="input-field col l6 offset-l3">
+      <%= f.text_field :name, class: 'validate' %><br>
+      <%= f.label :name %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col l6 offset-l3">
+      <%= f.text_field :username, class: 'validate' %><br>
+      <%= f.label :username %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col l6 offset-l3">
+      <%= f.text_field :email, class: 'validate' %><br>
+      <%= f.label :email %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col l6 offset-l3">
+      <%= f.password_field :password, class: 'validate' %><br>
+      <%= f.label :password %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col l6 offset-l3">
+      <%= f.password_field :password_confirmation, class: 'validate' %><br>
+      <%= f.label :password_confirmation %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col l6 offset-l3">
+      <% if @user.image.exists? %>
+        <%= image_tag @user.image.url(:medium) %><br />
+      <% end %>
+      <%= f.file_field :image, class: 'validate' %><br>
+    </div>
+  </div>
+  <%= f.submit "Sign Up", class: "btn btn-medium btn-primary" %>
+<% end %>

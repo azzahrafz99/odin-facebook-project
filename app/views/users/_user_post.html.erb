@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="container">
+    <%= link_to posts_path, class: "waves-effect waves-light btn" do %>
+      <i class="material-icons left">edit</i>Create Post
+    <% end %>
+    <% @user_posts.each do |user_post| %>
+      <div class="row">
+        <div class="col s12">
+          <div class="card horizontal">
+            <% if user_post.image.exists? %>
+              <div class="card-image center">
+                <p><%= image_tag user_post.image.url(:medium) %></p>
+              </div>
+            <% end %>
+            <div class="card-content">
+              <h5 class="post-title"><%= link_to user_post.title, post_path(user_post) %></h5>
+              <%= user_post.created_at.to_date %>
+              <div class="card-action">
+                <p><%= user_post.content %></p>
+                <br>
+                <%= link_to post_path(user_post), class: "btn-floating red", method: :delete, data:
+{confirm: "Really delete the post?"} do %>
+                  <i class="material-icons">delete</i>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :search
   before_action :restrict_to_signed_in, only: [:new, :create, :index]
 
   def new
@@ -28,7 +29,13 @@ class PostsController < ApplicationController
 
   private
 
+    def search
+      @results = User.all
+      @results = @results.where(username: params[:search])
+    end
+
     def post_params
         params.require(:post).permit(:title, :content, :image)
     end
+
 end

@@ -1,0 +1,26 @@
+AllCops:
+  DisplayCopNames: true
+Metrics/LineLength:
+  Max: 80
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/DocumentationMethod:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Metrics/ModuleLength:
+  Exclude:
+    - "**/*_spec.rb"
+Metrics/BlockLength:
+  Exclude:
+    - "**/*_spec.rb"
+    - "config/environments/development.rb"
+Lint/UselessAssignment:
+  Exclude:
+    - "**/*_spec.rb"
+Style/SymbolArray:
+  Enabled: false
+Style/PercentLiteralDelimiters:
+  Enabled: false
+Style/WordArray:
+  Enabled: false

@@ -25,11 +25,11 @@
   padding: 30px;
   img {
     border-radius: 50%;
+    width: 100px;
+    height: 100px;
   }
 }
 
-.image-size {
-  img {
-    width: 100px;
-  }
+.search-box {
+  border-radius: 2px;
 }

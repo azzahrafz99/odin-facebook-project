@@ -12,6 +12,11 @@
         <div class="card horizontal">
           <div class="card-stacked">
             <div class="card-content">
+              <% if @post.image.exists? %>
+                <div class="profile-pic">
+                  <%= image_tag @post.image.url(:medium) %>
+                </div>
+              <% end %>
               <h5 class="post-title"><%= @post.title%></h5>
               <b><%= @post.user.username %></b>
               <%= @post.created_at.to_date %>
@@ -28,6 +33,7 @@
     </blockquote>
     <div class="row">
       <%= form_for [@post, Comment.new] do |f| %>
+      <%= f.hidden_field :id %>
       <%= f.text_area :body, placeholder: "Add a comment", class: 'materialize-textarea' %><br/>
       <%= f.submit "Add Comment", class: 'waves-light btn' %>
       <% end %>

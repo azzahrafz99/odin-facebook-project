@@ -1,6 +1,8 @@
-<%= form_for (@user = User.find(params[:id])) do %>
-  <%= text_field :user, :username %>
-  <%= text_field :user, :email %>
-  <%= password_field :user, :password %>
-  <%= submit_tag "Submit" %>
-<% end %>
+<%= render 'layouts/header' %>
+<br>
+<div class="container center">
+  <h5>Edit Profile</h5>
+  <div class="row center">
+    <%= render 'users/form' %>
+  </div>
+</div>

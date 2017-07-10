@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
   resources :relationships, only: [:create, :destroy]
   get '/sign_in', to: 'sessions#new'
+  get '/sign_up', to: 'users#new'
   post '/sign_in', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
 end

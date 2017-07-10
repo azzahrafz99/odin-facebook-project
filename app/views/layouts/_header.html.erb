@@ -7,15 +7,22 @@
     </div>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <% if signed_in? %>
-      <li>
-        <%= link_to 'Home', posts_path %>
-      </li>
-      <li>
-        <%= link_to 'Profile', @current_user %>
-      </li>
-      <li>
-          <%= link_to 'Logout', logout_path %>
-      </li>
+        <li>
+          <%= link_to 'Home', posts_path %>
+        </li>
+        <li>
+          <%= link_to 'Profile', @current_user %>
+        </li>
+        <li>
+            <%= link_to 'Logout', logout_path %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to 'Sign In', sign_in_path %>
+        </li>
+        <li>
+          <%= link_to 'Sign Up', sign_up_path %>
+        </li>
       <% end %>
     </ul>
   </div>

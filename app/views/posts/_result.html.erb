@@ -1,0 +1,9 @@
+<% @results.each do |result| %>
+  <tr>
+    <td><%= result.username %></td>
+    <td><%= link_to "See Profile", user_path(result) %></td>
+  </tr>
+<% end %>
+<% if @results.empty? %>
+  <p>Not Found!</p>
+<% end %>

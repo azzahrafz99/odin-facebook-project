@@ -1,39 +1,5 @@
 <div class="row">
   <%= render 'layouts/header' %>
 </div>
-<div class="row center">
-  <div class="profile">
-    <img src="https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-1/p160x160/14203337_1086678391445475_4171027234814302056_n.jpg?oh=3b9bcad635a7fbe2d74acf2d855a0504&oe=5A09DB3C" alt="">
-    <h5><%= @user.username %></h5>
-    <p>Joined since <%= @user.created_at.strftime("%B") %>, <%= @user.created_at.strftime("%Y") %></p>
-  </div>
-</div>
-<div class="row">
-  <div class="container">
-    <%= link_to posts_path, class: "waves-effect waves-light btn" do %>
-      <i class="material-icons left">edit</i>Create Post
-    <% end %>
-    <% @user_posts.each do |user_post| %>
-      <div class="row">
-        <div class="col s12">
-          <div class="card horizontal">
-            <% if user_post.image.exists? %>
-              <div class="card-image center">
-                <p><%= image_tag user_post.image.url, class: 'image-size' %></p>
-              </div>
-            <% end %>
-            <div class="card-content">
-              <h5 class="post-title"><%= user_post.title %></h5>
-              <%= user_post.created_at.to_date %>
-              <div class="card-action">
-                <p><%= user_post.content %></p>
-                <%= link_to "Delete", post_path(user_post), method: :delete, data:
-{confirm: "Really delete the post?"} %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
+<%= render 'users/profile' %>
+<%= render 'users/user_post' %>

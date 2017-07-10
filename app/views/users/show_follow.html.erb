@@ -1,0 +1,20 @@
+<div class="row">
+  <%= render 'layouts/header' %>
+</div>
+<%= render 'users/profile' %>
+<div class="row">
+  <div class="container">
+    <blockquote>
+      <h3><%= @title %> (<%= @users.count %>)</h3>
+    </blockquote>
+    <% if @users.any? %>
+    <ul class="users follow">
+      <% @users.each do |user| %>
+      <%= link_to user.username, user_path(user)%>
+      <% end %>
+    </ul>
+    <% else %>
+      No users available
+    <% end %>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170706090040) do
+ActiveRecord::Schema.define(version: 20170707054444) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -62,6 +62,11 @@ ActiveRecord::Schema.define(version: 20170706090040) do
     t.string   "remember_token"
     t.string   "provider"
     t.string   "uid"
+    t.string   "image_file_name"
+    t.string   "name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
