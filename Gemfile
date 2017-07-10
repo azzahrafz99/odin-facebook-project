@@ -25,6 +25,8 @@ gem 'bcrypt-ruby'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
+gem 'acts_as_votable', '~> 0.10.0 '
+
 gem 'paperclip'
 
 gem 'rubocop'

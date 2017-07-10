@@ -27,6 +27,20 @@ class PostsController < ApplicationController
     redirect_to current_user
   end
 
+  def like
+    @post = Post.find(params[:id])
+    if @post.liked_by current_user
+      redirect_to posts_path(@post)
+    end
+  end
+
+  def dislike
+    @post = Post.find(params[:id])
+    if @post.disliked_by current_user
+      redirect_to posts_path(@post)
+    end
+  end
+
   private
 
     def search
@@ -35,7 +49,6 @@ class PostsController < ApplicationController
     end
 
     def post_params
-        params.require(:post).permit(:title, :content, :image)
+      params.require(:post).permit(:title, :content, :image)
     end
-
 end

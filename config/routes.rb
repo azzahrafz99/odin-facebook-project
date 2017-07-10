@@ -9,10 +9,15 @@ Rails.application.routes.draw do
   resources :sessions
   resources :posts do
     resources :comments
+    member do
+      get 'like'
+      get 'dislike'
+    end
   end
   resources :relationships, only: [:create, :destroy]
+
+  post '/sign_in', to: 'sessions#create'
   get '/sign_in', to: 'sessions#new'
   get '/sign_up', to: 'users#new'
-  post '/sign_in', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
 end
