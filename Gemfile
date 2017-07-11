@@ -26,6 +26,9 @@ gem 'bcrypt'
 
 gem 'devise'
 
+# Rails mountable Notification for any applications.
+gem 'notifications'
+
 gem 'omniauth'
 gem 'omniauth-facebook'
 

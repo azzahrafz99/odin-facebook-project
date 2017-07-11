@@ -6,8 +6,12 @@
       </a>
     </div>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li>
       <% if signed_in? %>
+        <li>
+          <%= link_to notifications_path do %>
+            <i class="material-icons">supervisor_account</i>
+          <% end %>
+        </li>
         <li>
           <%= link_to 'Home', posts_path %>
         </li>

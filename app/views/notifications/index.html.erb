@@ -1,0 +1,21 @@
+<%= render 'layouts/header' %>
+<div class="row">
+  <div class="container">
+    <blockquote>
+      <h3>Notifications (<%= @count %>)</h3>
+    </blockquote>
+    <% @notifications.each do |n| %>
+    <div class="card">
+      <%= link_to user_path(n.actor), class: 'not-list' do %>
+        <% if n.actor.image.exists? %>
+          <%= image_tag n.actor.image.url %>
+        <% else %>
+          <img src="https://pbs.twimg.com/profile_images/453956388851445761/8BKnRUXg.png" alt="" class="profil-pic">
+        <% end %>
+        <%= n.actor.username %>
+      <% end %>
+      just followed you
+    <% end %>
+    </div>
+  </div>
+</div>
