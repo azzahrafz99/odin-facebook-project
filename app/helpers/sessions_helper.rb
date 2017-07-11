@@ -1,47 +1,54 @@
 module SessionsHelper
-    def sign_in(user)
-        #create a new token
-        remember_token = User.new_remember_token
-        #place a raw token in the browser cookies
-        cookies.permanent[:remember_token] = remember_token
-        # save the hashed token to the db
-        user.update_attribute(:remember_token, User.digest(remember_token))
-        # set the current user equal to the given user
-        self.current_user = user
-    end
+  def sign_in(user)
+    session[:user_id] = user.id
+  end
 
-    def current_user=(user)
+  def remember(user)
+    user.remember
+    cookies.permanent.signed[:user_id] = user.id
+    cookies.permanent[:remember_token] = user.remember_token
+  end
+
+  def current_user
+    if (user_id = session[:user_id])
+      @current_user ||= User.find_by(id: session[:user_id])
+    elsif (user_id = cookies.signed[:user_id])
+      user = User.find_by(id: user_id)
+      if user && user.authenticated?(cookies[:remember_token])
+        sign_in user
         @current_user = user
+      end
     end
+  end
 
-    def current_user?(user)
-      user == current_user
+  def current_user=(user)
+      @current_user = user
+  end
+
+  def current_user?(user)
+    user == current_user
+  end
+
+  def forget(user)
+    user.forget
+    cookies.delete(:user_id)
+    cookies.delete(:remember_token)
+  end
+
+  def signed_in?
+    !current_user.nil?
+  end
+
+  def sign_out
+    forget(current_user)
+    session.delete(:user_id)
+    @current_user = nil
+  end
+
+  def restrict_to_signed_in
+    unless signed_in?
+      session[:return_to] = request.url if request.get?
+      redirect_to sign_in_path, notice: "Please sign in"
     end
-
-    def current_user
-        remember_token = User.digest(cookies[:remember_token])
-        @current_user ||= User.find_by(remember_token: remember_token)
-    end
-
-    def sign_out
-        # first change the user's remember token in the DB, in case it got stolen
-        current_user.update_attribute(:remember_token, User.digest(User.new_remember_token))
-        # remove the remember token from the session
-        cookies.delete(:remember_token)
-        # set teh user to nil
-        self.current_user = nil
-    end
-
-    def signed_in?
-        !current_user.nil?
-    end
-
-    def restrict_to_signed_in
-        unless signed_in?
-            session[:return_to] = request.url if request.get?
-            redirect_to sign_in_path, notice: "Please sign in"
-        end
-        # current_user
-    end
-
+  end
 end

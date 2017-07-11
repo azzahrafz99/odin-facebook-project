@@ -1,8 +1,9 @@
 class User < ApplicationRecord
+  attr_accessor :remember_token
+
   acts_as_voter
 
   before_save { self.email = email.downcase }
-  before_create :create_remember_token
 
   validates :username, presence:true
   validates :email, presence:true
@@ -29,21 +30,32 @@ class User < ApplicationRecord
 
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
 
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-    end
+  def self.digest(string)
+    Digest::SHA1.hexdigest(string).to_s
+    # cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+    #                                               BCrypt::Engine.cost
+
+    # BCrypt::Password.create(string)
   end
 
-  def User.new_remember_token
-      SecureRandom.urlsafe_base64
+  def self.new_token
+    SecureRandom.urlsafe_base64
   end
 
-  def User.digest(token)
-      Digest::SHA1.hexdigest(token.to_s)
+  def remember
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest, User.digest(remember_token))
+    # self.remember_digest = User.digest(remember_token)
+  end
+
+  def authenticated?(remember_token)
+    return false if remember_digest.nil?
+    # BCrypt::Password.new(remember_digest).is_password?(remember_token)
+    remember_digest = Digest::SHA1.hexdigest(remember_token)
+  end
+
+  def forget
+    update_attribute(:remember_digest, nil)
   end
 
   # follows as user
@@ -63,10 +75,4 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
-
-  private
-
-    def create_remember_token
-        self.remember_token = User.digest(User.new_remember_token)
-    end
 end
