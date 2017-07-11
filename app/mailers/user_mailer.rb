@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: 'odinfacebool@mail.com'
+  default from: 'odinfacebook@mail.com'
 
   def welcome_email(user)
     @user = user
