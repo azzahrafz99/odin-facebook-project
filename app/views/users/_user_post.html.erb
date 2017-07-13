@@ -12,18 +12,24 @@
                 <p><%= image_tag user_post.image.url(:medium) %></p>
               </div>
             <% end %>
-            <div class="card-content">
-              <h5 class="post-title"><%= link_to user_post.title, post_path(user_post) %></h5>
-              <%= user_post.created_at.to_date %>
-              <div class="card-action">
-                <p><%= user_post.content %></p>
-                <br>
-                <% if current_user?(@user) %>
-                  <%= link_to post_path(user_post), class: "btn-floating red", method: :delete, data:
-  {confirm: "Really delete the post?"} do %>
+            <div class="card-stacked">
+              <div class="card-content">
+                <h5 class="post-title"><%= link_to user_post.title, post_path(user_post) %></h5>
+                <%= user_post.created_at.to_date %>
+                <div class="card-action">
+                  <p><%= user_post.content %></p>
+                </div>
+                <div class="card-action">
+                  <% if current_user?(@user) %>
+                    <%= link_to post_path(user_post), class: "btn-floating red", method: :delete, data:
+                    {confirm: "Really want to delete this post?"} do %>
                     <i class="material-icons">delete</i>
+                    <% end %>
+                    <%= link_to edit_post_path(user_post), class: "btn-floating yellow darken-3" do %>
+                    <i class="material-icons">edit</i>
+                    <% end %>
                   <% end %>
-                <% end %>
+                </div>
               </div>
             </div>
           </div>

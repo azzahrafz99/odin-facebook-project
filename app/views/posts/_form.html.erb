@@ -1,9 +1,18 @@
-<div class="row">
+<div class="row center">
+  <% unless @post.errors.count.zero? %>
+    <div class="flash">
+      <p><strong><%= pluralize(@post.errors.count, "error") %> prohibited this information from being saved:</strong></p>
+      <ul>
+        <% @post.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="col s12 m12">
     <div class="card grey lighten-5">
       <div class="card-content">
-        <blockquote class="teal-text"><h3>Create Post</h3></blockquote>
-        <%= form_for [@post, Post.new], html: {multipart: true} do |f| %>
+        <%= form_for(@post, html: {multipart: true}) do |f| %>
         <p>
           <%= f.label :title %><br />
           <%= f.text_field :title %><br />

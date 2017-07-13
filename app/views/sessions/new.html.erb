@@ -1,5 +1,6 @@
 <%= render 'layouts/header' %>
 <div class="container center">
+  <br>
   <div class="row center">
     <h2>Sign In</h2>
     <%= form_for(:session, url: sessions_path) do |f| %>
@@ -24,6 +25,8 @@
       <%= f.submit "Sign in", class: "btn btn-medium btn-primary" %>
     <% end %>
     <br>
+    <%= link_to 'Sign in with Facebook', '/auth/facebook', class: "btn btn-medium btn-primary" %>
+    <br><br>
     <div class="row">
       Don't have account?
       <%= link_to "Sign Up", sign_up_path %>

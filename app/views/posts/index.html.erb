@@ -1,8 +1,12 @@
 <%= render 'layouts/header' %>
 <br>
-<%= render 'notifications/follow' %>
 <div class="row">
   <div class="container">
+    <div class="row">
+        <% flash.each do |name, msg| -%>
+          <%= content_tag :div, msg, class: "flash-success" %>
+        <% end -%>
+    </div>
     <div class="col l12">
       <%= form_tag posts_path, method: :get, remote: true do |f| %>
         <div class="col l3">
@@ -15,10 +19,13 @@
         </div>
       <% end %>
     </div>
+    <%= link_to new_post_path, class: "waves-effect waves-light btn blue" do %>
+    <i class="material-icons">edit</i>
+    <span>What's on your mind</span>
+    <% end %>
     <div class="results">
 
     </div>
-    <%= render 'posts/new'%>
     <% @posts.each do |post| %>
       <div class="row">
         <div class="col s12">

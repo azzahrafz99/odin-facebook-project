@@ -1,8 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    if signed_in?
-      redirect_to user_path(current_user.id)
-    end
+    redirect_to user_path(current_user.id) if signed_in?
   end
 
   def create
@@ -17,7 +15,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-      sign_out if signed_in?
-      redirect_to sign_in_path
+    sign_out
+    redirect_to sign_in_path, notice: "You have successfully signed out."
   end
 end

@@ -12,7 +12,6 @@ class CreateNotifications < ActiveRecord::Migration[4.2]
       t.string :third_target_type
       t.integer :third_target_id
       t.datetime :read_at
-
       t.timestamps null: false
     end
 
