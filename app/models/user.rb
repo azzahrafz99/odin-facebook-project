@@ -5,14 +5,14 @@ class User < ApplicationRecord
 
   before_save { self.email = email.downcase }
 
-  validates :username, presence: true
-  validates :email, presence: true
-  validates :password, length: { minimum: 6 }, presence: true
-  validates :password_confirmation, presence: true
+  # validates :username, presence: true
+  # validates :email, presence: true
+  # validates :password, length: { minimum: 6 }, presence: true
+  # validates :password_confirmation, presence: true
 
   has_many :events
   has_many :posts
-
+  has_many :authorizations
   has_many :active_relationships, class_name: 'Relationship',
                                   foreign_key: 'follower_id',
                                   dependent: :destroy
@@ -33,14 +33,10 @@ class User < ApplicationRecord
                                                    'image/jpeg',
                                                    'image/png']
 
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.email = auth.info.email
-      user.oauth_token = auth.credentials.token
-      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      user.save!
+  def add_provider(auth_hash)
+    # Check if the provider already exists, so we don't add it twice
+    unless authorizations.find_by_provider_and_uid(auth_hash["provider"], auth_hash["uid"])
+      Authorization.create :user => self, :provider => auth_hash["provider"], :uid => auth_hash["uid"]
     end
   end
 

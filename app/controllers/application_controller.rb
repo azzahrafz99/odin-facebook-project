@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  around_filter :render_404
   protect_from_forgery with: :exception
   include SessionsHelper
 
@@ -10,4 +9,9 @@ class ApplicationController < ActionController::Base
   rescue ActiveRecord::RecordNotFound
     render file: "#{Rails.root}/public/404.html", status: 404, layout: false
   end
+
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+  helper_method :current_user
 end

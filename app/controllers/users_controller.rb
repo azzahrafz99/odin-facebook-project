@@ -11,7 +11,9 @@ class UsersController < ApplicationController
     @user_posts = @user.posts.order(created_at: :desc)
   end
 
-  def new; end
+  def new
+    @user = User.new
+  end
 
   def update
     if @user.update(user_params)
@@ -25,11 +27,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.create(user_params)
     if @user.save && @user.authenticate(params[:user][:password])
       if @user.valid?
         UserMailer.welcome_email(@user).deliver_now
-        redirect_to sign_in_path
+        sign_in @user
       else
         render :new
       end
