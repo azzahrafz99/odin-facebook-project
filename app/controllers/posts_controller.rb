@@ -50,6 +50,10 @@ class PostsController < ApplicationController
     redirect_to posts_path(@post) if @post.disliked_by current_user
   end
 
+  def routing
+    render file: "#{Rails.root}/public/404.html", status: 404, layout: false
+  end
+
   private
 
   def search

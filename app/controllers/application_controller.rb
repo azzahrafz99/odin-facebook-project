@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  around_filter :render_404
   protect_from_forgery with: :exception
   include SessionsHelper
 

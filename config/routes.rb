@@ -24,4 +24,5 @@ Rails.application.routes.draw do
   get '/sign_in', to: 'sessions#new'
   get '/sign_up', to: 'users#new'
   get '/logout', to: 'sessions#destroy'
+  match '*a', to: 'posts#routing', via: :get
 end
