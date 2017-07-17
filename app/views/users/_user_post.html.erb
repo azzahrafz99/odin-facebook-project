@@ -1,7 +1,9 @@
 <div class="row">
   <div class="container">
-    <%= link_to new_post_path, class: "waves-effect waves-light btn" do %>
-      <i class="material-icons left">edit</i>Create Post
+    <% if current_user?(@user) %>
+      <%= link_to new_post_path, class: "waves-effect waves-light btn" do %>
+        <i class="material-icons left">edit</i>Create Post
+      <% end %>
     <% end %>
     <% @user_posts.each do |user_post| %>
       <div class="row">
