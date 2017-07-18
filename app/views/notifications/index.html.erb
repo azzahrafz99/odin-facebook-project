@@ -8,11 +8,11 @@
     <div class="col l12">
       <div class="card">
         <div class="info">
-          <%= link_to user_path(n.actor), class: 'not-list' do %>
+          <%= link_to user_path(n.actor), class: 'notification' do %>
             <% if n.actor.image.exists? %>
               <%= image_tag n.actor.image.url %>
             <% else %>
-              <img src="https://pbs.twimg.com/profile_images/453956388851445761/8BKnRUXg.png" alt="" class="profil-pic">
+              <img src="https://pbs.twimg.com/profile_images/453956388851445761/8BKnRUXg.png" alt="Profile Picture" class="profil-pic">
             <% end %>
             <%= n.actor.username %>
           <% end %>
