@@ -7,7 +7,7 @@
     <% end %>
     <h5><%= @user.name %></h5>
     <h6><%= @user.username %></h6>
-    <p>Joined since <%= @user.created_at.strftime("%B") %>, <%= @user.created_at.strftime("%Y") %></p>
+      <p>Joined since <%= @user.created_at.strftime("%d %B, %Y") %></p>
     <% if current_user?(@user) %>
       <%= link_to edit_user_path(@user), class: "btn-floating btn waves-effect waves-light pink" do %>
         <i class="material-icons">edit</i>

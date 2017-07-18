@@ -1,3 +1,21 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.follow-list {
+  margin-top: 100px;
+  .follow {
+      img {
+        border-radius: 50%;
+        border: 5px solid white;
+        width: 100px;
+        height: 100px;
+      }
+
+    .card-content {
+      margin-top: -80px;
+      padding-top: 50px;
+    }
+  }
+
+}

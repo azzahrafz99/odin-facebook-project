@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :search
-  before_action :restrict_to_signed_in, only: [:new, :create, :index]
+  before_action :restrict_to_signed_in
   before_action :post, only: [:show, :destroy, :like, :dislike, :edit, :update]
 
   def new
@@ -24,7 +24,10 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @users = current_user
+    @following = current_user.following.ids
+    @user_posts = Post.where(user_id: @users)
+    @following_posts = Post.where(user_id: @following)
   end
 
   def edit; end
@@ -32,7 +35,7 @@ class PostsController < ApplicationController
   def update
     @post.update(post_params)
     if @post.valid?
-      redirect_to posts_path, notice: "Your post has been updated!"
+      redirect_to posts_path, notice: 'Your post has been updated!'
     else
       render :edit
     end

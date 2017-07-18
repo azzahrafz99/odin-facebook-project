@@ -1,9 +1,7 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token
-
   acts_as_voter
 
-  before_save { self.email = email.downcase }
+  before_save { self.email = email.downcase } 
 
   # validates :username, presence: true
   # validates :email, presence: true
@@ -32,30 +30,6 @@ class User < ApplicationRecord
                                     content_type: ['image/jpg',
                                                    'image/jpeg',
                                                    'image/png']
-
-  def add_provider(auth_hash)
-    # Check if the provider already exists, so we don't add it twice
-    unless authorizations.find_by_provider_and_uid(auth_hash["provider"], auth_hash["uid"])
-      Authorization.create :user => self, :provider => auth_hash["provider"], :uid => auth_hash["uid"]
-    end
-  end
-
-  def self.digest(string)
-    Digest::SHA1.hexdigest(string).to_s
-  end
-
-  def self.new_token
-    SecureRandom.urlsafe_base64
-  end
-
-  def remember
-    self.remember_token = User.new_token
-    update_attribute(:remember_digest, User.digest(remember_token))
-  end
-
-  def forget
-    update_attribute(:remember_digest, nil)
-  end
 
   # follows as user
   def follow(other_user)

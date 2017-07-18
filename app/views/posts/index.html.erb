@@ -26,7 +26,34 @@
     <div class="results">
 
     </div>
-    <% @posts.each do |post| %>
+    <% @user_posts.each do |post| %>
+      <div class="row">
+        <div class="col s12">
+          <div class="card horizontal">
+            <% if post.image.exists? %>
+              <div class="card-image">
+                <p><%= image_tag post.image.url(:medium) %></p>
+              </div>
+            <% end %>
+            <div class="card-stacked">
+              <div class="card-content">
+                <h5 class="post-title"><%= link_to post.title, post_path(post) %></h5>
+                Posted by <b><%= post.user.username %></b>
+                <%= post.created_at.to_date %>
+                <div class="card-action">
+                  <p><%= post.content %></p>
+                </div>
+                <p><%= link_to 'See comments', post_path(post) %> <%= post.comments.count %> Comments</p>
+                <br>
+                <%= render 'posts/like_form', post: post%>
+                <%= render 'posts/likes', post: post %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <% @following_posts.each do |post| %>
       <div class="row">
         <div class="col s12">
           <div class="card horizontal">

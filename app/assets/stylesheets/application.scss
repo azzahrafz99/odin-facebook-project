@@ -1,5 +1,8 @@
 @import "materialize";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
+@import "users";
+@import "posts";
+@import "notifications";
 
 .blue-bg {
   background-color: #3F51B5;
@@ -27,6 +30,7 @@
     border-radius: 50%;
     width: 100px;
     height: 100px;
+    border: 3px solid white;
   }
 }
 

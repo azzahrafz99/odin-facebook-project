@@ -4,17 +4,36 @@
 <%= render 'users/profile' %>
 <div class="row">
   <div class="container">
-    <blockquote>
-      <h3><%= @title %> (<%= @users.count %>)</h3>
-    </blockquote>
+    <div class="row">
+      <blockquote>
+        <h3><%= @title %> (<%= @users.count %>)</h3>
+      </blockquote>
+    </div>
     <% if @users.any? %>
-    <ul class="users follow">
+    <div class="row follow-list">
       <% @users.each do |user| %>
-      <%= link_to user.username, user_path(user)%>
+      <div class="col l4">
+        <div class="card follow">
+          <div class="card-content">
+            <div class="profile-pic">
+              <% if user.image.exists? %>
+                <center><%= image_tag user.image.url %></center>
+              <% else %>
+                <center><img src="https://pbs.twimg.com/profile_images/453956388851445761/8BKnRUXg.png" alt="profile-pic  "></center>
+              <% end %>
+            </div>
+          </div>
+          <div class="card-content grey lighten-4">
+            <b><%= link_to user.username, user_path(user)%></b><br>
+            <%= user.name %><br>
+            Joined since <%= @user.created_at.strftime("%d %B, %Y") %>
+          </div>
+        </div>
+      </div>
       <% end %>
-    </ul>
+    </div>
     <% else %>
-      No users
+      No user
     <% end %>
   </div>
 </div>

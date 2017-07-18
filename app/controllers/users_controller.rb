@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :user, only: [:show, :edit, :update]
+  before_action :restrict_to_signed_in, only: [:index, :edit, :update, :show]
 
   def index
     @users = User.all
@@ -17,9 +18,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      if @user.valid?
-        flash[:notice] = "Your profile has been updated!"
-      end
+      flash[:notice] = 'Your profile has been updated!' if @user.valid?
       redirect_to user_path(current_user)
     else
       render 'edit'
@@ -27,11 +26,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
+    @user = User.new(user_params)
     if @user.save && @user.authenticate(params[:user][:password])
       if @user.valid?
         UserMailer.welcome_email(@user).deliver_now
         sign_in @user
+        redirect_to user_path(current_user)
       else
         render :new
       end
